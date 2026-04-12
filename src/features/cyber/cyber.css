@@ -1,0 +1,53 @@
+.cyber-page .incident-list,
+.cyber-page .threat-meter {
+  display: grid;
+  gap: 12px;
+}
+
+.cyber-page .threat-meter {
+  min-height: 220px;
+  align-content: center;
+}
+
+.cyber-page .threat-meter strong {
+  font-family: var(--font-mono);
+}
+
+.cyber-page .threat-meter__band {
+  height: 14px;
+  border-radius: 999px;
+}
+
+.cyber-page .threat-meter__band--high {
+  width: 68%;
+  background: rgba(248, 113, 113, 0.9);
+}
+
+.cyber-page .threat-meter__band--medium {
+  width: 82%;
+  background: rgba(245, 158, 11, 0.72);
+}
+
+.cyber-page .threat-meter__band--low {
+  width: 100%;
+  background: rgba(45, 212, 191, 0.45);
+}
+
+.cyber-page .incident-list__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border-soft);
+  align-items: center;
+}
+
+.cyber-page .incident-list__row:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.cyber-page .incident-list__row p {
+  margin: 6px 0 0;
+  color: var(--text-secondary);
+}

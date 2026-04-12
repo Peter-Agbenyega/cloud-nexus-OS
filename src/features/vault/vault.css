@@ -1,0 +1,17 @@
+.vault-page .locked-shell {
+  display: grid;
+  gap: 14px;
+  align-content: center;
+  min-height: 220px;
+}
+
+.vault-page .locked-shell__badge {
+  display: inline-flex;
+  width: fit-content;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--module-accent) 32%, transparent);
+  background: color-mix(in srgb, var(--module-accent) 16%, transparent);
+  letter-spacing: 0.16em;
+  font-family: var(--font-mono);
+}

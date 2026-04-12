@@ -1,0 +1,25 @@
+.factory-page .kanban-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.factory-page .kanban-lane {
+  display: grid;
+  gap: 12px;
+}
+
+.factory-page .kanban-card {
+  width: 100%;
+  text-align: left;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: var(--bg-panel-strong);
+}
+
+@media (max-width: 1440px) {
+  .factory-page .kanban-grid {
+    grid-template-columns: 1fr;
+  }
+}
