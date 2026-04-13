@@ -8,7 +8,6 @@ import {
   brainCategories,
   type BrainContentFormat,
   type BrainEntryWritableFields,
-  type BrainStatus,
 } from '../brain.types'
 
 type BrainEntryFormProps = {
@@ -20,7 +19,7 @@ type BrainEntryFormProps = {
 }
 
 const contentFormatOptions: BrainContentFormat[] = ['markdown', 'plaintext']
-const statusOptions: BrainStatus[] = ['draft', 'active', 'archived']
+const statusOptions = ['draft', 'active'] as const
 
 export function BrainEntryForm({
   mode,
@@ -53,6 +52,10 @@ export function BrainEntryForm({
   const errors = useMemo(() => validateBrainEntry(values), [values])
   const isValid = Object.keys(errors).length === 0
   const validationMessage = touched && !isValid ? 'Complete the required fields before saving.' : null
+  const isDirty = useMemo(
+    () => JSON.stringify(values) !== JSON.stringify(initialValue),
+    [initialValue, values],
+  )
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -63,6 +66,14 @@ export function BrainEntryForm({
     }
 
     onSubmit(values)
+  }
+
+  const handleCancel = () => {
+    if (isDirty && !window.confirm('Discard unsaved changes?')) {
+      return
+    }
+
+    onCancel()
   }
 
   return (
@@ -78,7 +89,7 @@ export function BrainEntryForm({
           </p>
         </div>
         <div className="brain-entry-form__actions">
-          <button type="button" className="brain-action brain-action--secondary" onClick={onCancel}>
+          <button type="button" className="brain-action brain-action--secondary" onClick={handleCancel}>
             Cancel
           </button>
           <button type="submit" className="brain-action" disabled={!isValid}>
@@ -122,7 +133,7 @@ export function BrainEntryForm({
 
         <label className="brain-entry-form__field">
           <span>Status</span>
-          <select value={status} onChange={(event) => setStatus(event.target.value as BrainStatus)}>
+          <select value={status} onChange={(event) => setStatus(event.target.value as (typeof statusOptions)[number])}>
             {statusOptions.map((item) => (
               <option key={item} value={item}>
                 {item}

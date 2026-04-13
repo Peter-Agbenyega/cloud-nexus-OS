@@ -11,7 +11,7 @@ export function resolveBrainRoute(segments: string[]): BrainRouteState {
     }
   }
 
-  if (segments[0] === 'new') {
+  if (segments[0] === 'new' && segments.length === 1) {
     return {
       mode: 'create',
       selectedEntryId: null,

@@ -135,7 +135,11 @@ function BrainPageContent() {
                 <dl className="brain-workspace__stats">
                   <div>
                     <dt>Status</dt>
-                    <dd>{workspaceSelection.state === 'create' ? 'create-draft' : workspaceSelection.status ?? 'idle'}</dd>
+                    <dd>
+                      {workspaceSelection.state === 'create'
+                        ? `create-${workspaceSelection.status ?? 'unknown'}`
+                        : workspaceSelection.status ?? 'idle'}
+                    </dd>
                   </div>
                   <div>
                     <dt>Format</dt>

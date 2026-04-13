@@ -15,6 +15,7 @@ export function useBrainWorkspace() {
   const repository = useBrainRepository()
   const [activeCategory, setActiveCategory] = useState<BrainCategoryFilter>('All')
   const [query, setQuery] = useState('')
+  const createEntryDraft = useMemo(() => createDefaultBrainEntryDraft(), [])
 
   const routeState = useMemo(() => resolveBrainRoute(route.segments), [route.segments])
   const selectedEntryId = routeState.selectedEntryId
@@ -40,12 +41,13 @@ export function useBrainWorkspace() {
   )
   const workspaceSelection = useMemo(
     () => getBrainWorkspaceSelectionSummary({
+      createEntryDraft,
       routeMode: routeState.mode,
       routeSegmentCount: route.segments.length,
       selectedEntryId,
       selectedEntry,
     }),
-    [route.segments.length, routeState.mode, selectedEntry, selectedEntryId],
+    [createEntryDraft, route.segments.length, routeState.mode, selectedEntry, selectedEntryId],
   )
   const workspaceDataset = useMemo(
     () => getBrainWorkspaceDatasetSummary(datasetStats, visibleEntries),
@@ -142,7 +144,7 @@ export function useBrainWorkspace() {
     submitCreateEntry,
     submitEditEntry,
     archiveSelectedEntry,
-    createEntryDraft: createDefaultBrainEntryDraft(),
+    createEntryDraft,
     clearSelection,
   }
 }

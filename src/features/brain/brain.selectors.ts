@@ -2,6 +2,7 @@ import type {
   BrainContentFormat,
   BrainDatasetStats,
   BrainEntry,
+  BrainEntryCreatePayload,
   BrainEntrySearchFilters,
   BrainSelectionState,
   BrainStatus,
@@ -66,6 +67,7 @@ export function getBrainSelectionState(entryId: string | null, entry: BrainEntry
 }
 
 export function getBrainWorkspaceSelectionSummary(params: {
+  createEntryDraft: BrainEntryCreatePayload
   routeMode: BrainRouteState['mode']
   routeSegmentCount: number
   selectedEntryId: string | null
@@ -83,8 +85,8 @@ export function getBrainWorkspaceSelectionSummary(params: {
       : params.routeMode === 'edit' && params.selectedEntry
         ? `Editing ${params.selectedEntry.title}`
         : params.selectedEntry?.title ?? null,
-    status: state === 'create' ? 'draft' : params.selectedEntry?.status ?? null,
-    format: state === 'create' ? 'markdown' : params.selectedEntry?.contentFormat ?? null,
+    status: state === 'create' ? params.createEntryDraft.status : params.selectedEntry?.status ?? null,
+    format: state === 'create' ? params.createEntryDraft.contentFormat : params.selectedEntry?.contentFormat ?? null,
     routeSegmentCount: params.routeSegmentCount,
   }
 }
