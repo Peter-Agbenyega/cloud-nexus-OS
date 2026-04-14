@@ -124,7 +124,7 @@ function BrainPageContent() {
             <div className="brain-workspace__toolbar">
               <span>route: {workspaceRoute.rawHash}</span>
               <span>view: {workspaceRoute.selectionState}</span>
-              <span>storage: memory</span>
+              <span>storage: localStorage</span>
               <span>sync: offline</span>
               <span>mode: local-only</span>
             </div>

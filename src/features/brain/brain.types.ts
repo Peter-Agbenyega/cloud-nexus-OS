@@ -11,9 +11,13 @@ export const brainCategories = [
 export type BrainCategory = (typeof brainCategories)[number]
 export type BrainCategoryFilter = BrainCategory | 'All'
 
-export type BrainContentFormat = 'plaintext' | 'markdown'
+export const brainContentFormats = ['plaintext', 'markdown'] as const
 
-export type BrainStatus = 'active' | 'draft' | 'archived'
+export type BrainContentFormat = (typeof brainContentFormats)[number]
+
+export const brainStatuses = ['active', 'draft', 'archived'] as const
+
+export type BrainStatus = (typeof brainStatuses)[number]
 
 export type BrainEntry = {
   id: string
